@@ -10,13 +10,13 @@ module.exports.getUserId = (req, res) => {
   User.findById(req.params.userId)
     .then((user) => {
       if (!user) {
-        res.status(400).send({ message: 'Переданы некорректные данные' });
+        res.status(404).send({ message: 'Ошибка: пользователь не найден' });
       }
       res.send({ data: user });
     })
     .catch((err) => {
       if (err.name === 'CastError') {
-        res.status(404).send({ message: 'Ошибка: пользователь не найден' });
+        res.status(400).send({ message: 'Переданы некорректные данные' });
       } else {
         res.status(500).send({ message: 'Произошла ошибка' });
       }
