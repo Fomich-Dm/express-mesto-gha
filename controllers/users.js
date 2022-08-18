@@ -1,14 +1,5 @@
 const User = require('../models/user');
 
-/*function determiningError(err, res) {
-  if (err.name === 'ValidationError') {
-    res.status(404).send({ message: 'Ошибка: пользователь не найден' });
-  } else if (err.name === 'CastError') {
-    res.status(400).send({ message: 'Ошибка: некорректный запрос' });
-  }
-  res.status(500).send({ message: 'Произошла ошибка' });
-}*/
-
 module.exports.getUsers = (req, res) => {
   User.find({})
     .then((users) => res.send({ data: users }))
@@ -51,7 +42,6 @@ module.exports.editUserInfo = (req, res) => {
       res.send({ data: user });
     })
     .catch((err) => {
-      console.log(err);
       if (err.name === 'ValidationError') {
         res.status(400).send({ message: 'Переданы некорректные данные' });
       } else if (err.name === 'CastError') {
