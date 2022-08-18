@@ -15,7 +15,7 @@ module.exports.getUserId = (req, res) => {
       res.send({ data: user });
     })
     .catch((err) => {
-      if (err.name === 'CastError') {
+      if (err.name === 'ValidationError') {
         res.status(400).send({ message: 'Переданы некорректные данные' });
       } else {
         res.status(500).send({ message: 'Произошла ошибка' });
@@ -40,7 +40,11 @@ module.exports.createUser = (req, res) => {
 module.exports.editUserInfo = (req, res) => {
   const { name, about } = req.body;
 
-  User.findByIdAndUpdate(req.user._id, { name, about }, { new: true })
+  User.findByIdAndUpdate(
+    req.user._id,
+    { name, about },
+    { new: true, runValidators: true },
+  )
     .then((user) => {
       res.send({ data: user });
     })
@@ -58,7 +62,11 @@ module.exports.editUserInfo = (req, res) => {
 module.exports.editUserAvatar = (req, res) => {
   const { avatar } = req.body;
 
-  User.findByIdAndUpdate(req.user._id, { avatar }, { new: true })
+  User.findByIdAndUpdate(
+    req.user._id,
+    { avatar },
+    { new: true, runValidators: true },
+  )
     .then((user) => res.send({ data: user }))
     .catch((err) => {
       if (err.name === 'ValidationError') {
