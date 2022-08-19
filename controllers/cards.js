@@ -44,8 +44,8 @@ module.exports.likeCard = (req, res) => {
       res.send({ data: card });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.status(400).send({ message: 'Переданы некорректные данные' });
+      if (err.name === 'CastError') {
+        res.status(400).send({ message: 'Получен пользователя с некорректным id' });
       } else {
         res.status(500).send({ message: 'Произошла ошибка' });
       }
@@ -65,8 +65,8 @@ module.exports.dislikeCard = (req, res) => {
       res.send({ data: card });
     })
     .catch((err) => {
-      if (err.name === 'ValidationError') {
-        res.status(400).send({ message: 'Переданы некорректные данные' });
+      if (err.name === 'CastError') {
+        res.status(400).send({ message: 'Получен пользователя с некорректным id' });
       } else {
         res.status(500).send({ message: 'Произошла ошибка' });
       }
