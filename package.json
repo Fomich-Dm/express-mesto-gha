@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "lint": "npx eslint",
+    "lint": "npx eslint .",
     "start": "node app.js",
     "dev": "nodemon app.js"
   },
@@ -14,7 +14,7 @@
     "url": "git+https://github.com/Fomich-Dm/express-mesto-gha.git"
   },
   "keywords": [],
-  "author": "",
+  "author": "Dmitriy Fomin",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/Fomich-Dm/express-mesto-gha/issues"
