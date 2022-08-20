@@ -70,6 +70,8 @@ module.exports.editUserInfo = (req, res) => {
         res
           .status(BadRequest)
           .send({ message: 'Получен пользователя с некорректным id' });
+      } else if (err.name === 'ValidationError') {
+        res.status(BadRequest).send({ message: 'Переданы некорректные данные' });
       } else {
         res.status(InternalServerError).send({ message: 'Произошла ошибка' });
       }
@@ -98,6 +100,8 @@ module.exports.editUserAvatar = (req, res) => {
         res
           .status(BadRequest)
           .send({ message: 'Получен пользователя с некорректным id' });
+      } else if (err.name === 'ValidationError') {
+        res.status(BadRequest).send({ message: 'Переданы некорректные данные' });
       } else {
         res.status(InternalServerError).send({ message: 'Произошла ошибка' });
       }
