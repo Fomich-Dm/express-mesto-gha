@@ -27,15 +27,17 @@ module.exports.createCard = (req, res) => {
 };
 
 module.exports.deleteCard = (req, res) => {
-  Card.findByIdAndRemove(req.params.cardId)
+  Card.findById(req.params.cardId)
     .then((card) => {
       if (!card) {
         res
           .status(NotFound)
           .send({ message: 'Ошибка: пользователь не найден' });
-      } else {
-        res.send({ data: card });
       }
+      if (card.owner != req.user._id) {
+        res.status(NotFound).send({ message: 'не ваша карточка' });
+      }
+      return card.remove();
     })
     .catch((err) => {
       if (err.name === 'CastError') {

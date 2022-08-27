@@ -53,7 +53,13 @@ module.exports.getUserId = (req, res) => {
 module.exports.getUserInfo = (req, res) => {
   User.findById(req.user._id)
     .then((user) => {
-      res.send({ data: user });
+      if (!user) {
+        res
+          .status(NotFound)
+          .send({ message: 'Ошибка: пользователь не найден' });
+      } else {
+        res.send({ data: user });
+      }
     })
     .catch(() => {
       res.status(InternalServerError).send({ message: 'Произошла ошибка' });
@@ -77,7 +83,7 @@ module.exports.createUser = (req, res) => {
       email,
       password: hash,
     }))
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         res

@@ -15,8 +15,10 @@ app.use(express.json());
 
 app.post('/signin', login);
 app.post('/signup', createUser);
-app.use('/users', auth, require('./routes/users'));
-app.use('/cards', auth, require('./routes/cards'));
+
+app.use(auth);
+app.use('/users', require('./routes/users'));
+app.use('/cards', require('./routes/cards'));
 
 app.use('*', (req, res) => {
   res.status(404).send({ message: 'Страница не найдена' });
