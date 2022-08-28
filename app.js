@@ -2,6 +2,9 @@ const express = require('express');
 const mongoose = require('mongoose');
 const NotFoundError = require('./errors/NotFoundError');
 
+const { celebrate, Joi } = require('celebrate');
+const { errors } = require('celebrate');
+
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
 
@@ -14,7 +17,12 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 
 app.use(express.json());
 
-app.post('/signin', login);
+app.post('/signin', celebrate({
+  body: Joi.object().keys({
+    email: Joi.string().email().required(),
+    password: Joi.string().required(),
+  }),
+}), login);
 app.post('/signup', createUser);
 
 app.use('/users', auth, require('./routes/users'));
@@ -23,16 +31,14 @@ app.use('/cards', auth, require('./routes/cards'));
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
 });
+
+app.use(errors());
 app.use((err, req, res, next) => {
   const { statusCode = 500, message } = err;
 
-  res
-    .status(statusCode)
-    .send({
-      message: statusCode === 500
-        ? 'На сервере произошла ошибка'
-        : message,
-    });
+  res.status(statusCode).send({
+    message: statusCode === 500 ? 'На сервере произошла ошибка' : message,
+  });
   next();
 });
 
