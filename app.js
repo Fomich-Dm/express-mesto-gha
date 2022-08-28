@@ -1,9 +1,8 @@
 const express = require('express');
 const mongoose = require('mongoose');
-const NotFoundError = require('./errors/NotFoundError');
-
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
+const NotFoundError = require('./errors/NotFoundError');
 
 const { login, createUser } = require('./controllers/users');
 const auth = require('./middlewares/auth');
@@ -27,10 +26,10 @@ app.post('/signup', celebrate({
   body: Joi.object().keys({
     name: Joi.string().min(2).max(30),
     about: Joi.string().min(2).max(30),
-    avatar: Joi.string(),
+    avatar: Joi.string().pattern(/(?:https?):\/\/(\w+:?\w*)?(\S+)(:\d+)?(\/|\/([\w#!:.?+=&%!\-/]))?/),
     email: Joi.string().email().required(),
     password: Joi.string().required(),
-  })
+  }),
 }), createUser);
 
 app.use('/users', auth, require('./routes/users'));
