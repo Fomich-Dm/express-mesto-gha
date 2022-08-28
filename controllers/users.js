@@ -17,7 +17,9 @@ module.exports.login = (req, res, next) => {
 
       res.send({ token });
     })
-    .catch(next(new Unauthorized('ошибка при авторизации')));
+    .catch(() => {
+      next(new Unauthorized('ошибка при авторизации'));
+    });
 };
 
 module.exports.getUsers = (req, res, next) => {
@@ -74,13 +76,7 @@ module.exports.createUser = (req, res, next) => {
       email,
       password: hash,
     }))
-    .then((user) => res.send({
-      name: user.name,
-      about: user.about,
-      avatar: user.avatar,
-      email: user.email,
-      password: user.password,
-    }))
+    .then((user) => res.send(user))
     .catch((err) => {
       if (err.name === 'ValidationError') {
         next(new BadRequestError('Переданы некорректные данные'));
