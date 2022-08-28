@@ -17,9 +17,8 @@ app.use(express.json());
 app.post('/signin', login);
 app.post('/signup', createUser);
 
-app.use(auth);
-app.use('/users', require('./routes/users'));
-app.use('/cards', require('./routes/cards'));
+app.use('/users', auth, require('./routes/users'));
+app.use('/cards', auth, require('./routes/cards'));
 
 app.use('*', (req, res, next) => {
   next(new NotFoundError('Страница не найдена'));
@@ -34,6 +33,7 @@ app.use((err, req, res, next) => {
         ? 'На сервере произошла ошибка'
         : message,
     });
+  next();
 });
 
 app.listen(PORT, () => {});
