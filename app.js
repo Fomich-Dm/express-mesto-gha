@@ -2,6 +2,7 @@ const express = require('express');
 const mongoose = require('mongoose');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
+const cors = require('cors');
 const NotFoundError = require('./errors/NotFoundError');
 
 const { login, createUser } = require('./controllers/users');
@@ -16,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017/mestodb', {
 });
 
 app.use(express.json());
+app.use(cors());
 
 app.use(requestLogger);
 
