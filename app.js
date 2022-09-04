@@ -1,8 +1,8 @@
 const express = require('express');
+const cors = require('cors');
 const mongoose = require('mongoose');
 const { celebrate, Joi } = require('celebrate');
 const { errors } = require('celebrate');
-const cors = require('cors');
 const NotFoundError = require('./errors/NotFoundError');
 
 const { login, createUser } = require('./controllers/users');
