@@ -109,7 +109,6 @@ module.exports.editUserInfo = (req, res, next) => {
         next(new NotFoundError('Пользователь не найден'));
       } else {
         res.send({ data: user });
-        console.log({ data: user })
       }
     })
     .catch((err) => {
