@@ -1,28 +1,45 @@
-[![Tests](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-13-sprint.yml) [![Tests](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/yandex-praktikum/express-mesto-gha/actions/workflows/tests-14-sprint.yml)
-# Проект Mesto фронтенд + бэкенд
+# React mesto backend
 
-https://github.com/Fomich-Dm/express-mesto-gha
+• Mesto - это интерактивная SPA-страница, с помощью которой пользователи могут обмениваться фотографиями.
 
-## Настройка бейджей статуса тестов
-Перед началом работы над проектом рекомендуется исправить бейджи, отражающие статус прохождения тестов.
-Для этого замените разметку бейджей на следующий фрагмент, подставив вместо `${Fomich-Dm}` и `${express-mesto-gha}` соответствующие значения.
+## Описание:
 
-```
-[![Tests for sprint 13](https://github.com/Fomich-Dm/express-mesto-gha/actions/workflows/tests-13-sprint.yml/badge.svg)](https://github.com/Fomich-Dm/express-mesto-gha/actions/workflows/tests-13-sprint.yml) 
+Репозиторий для приложения проекта Mesto, включающий фронтенд и бэкенд части приложения со следующими возможностями: авторизации и регистрации пользователей, операции с карточками и пользователями. В этом интерактивном приложении можно размещать фотографиями, удалять их и ставить лайки.
 
-[![Tests for sprint 14](https://github.com/Fomich-Dm/express-mesto-gha/actions/workflows/tests-14-sprint.yml/badge.svg)](https://github.com/Fomich-Dm/express-mesto-gha/actions/workflows/tests-14-sprint.yml)
-```
+Адрес фронтенд проекта :  https://mesto.fomindmitriy.nomoredomains.sbs/
+
+Адрес бекэнда проекта : https://api.mesto.FominDmitriy.nomorepartiesxyz.ru
 
 
-## Директории
+## Стек технологий:
 
-`/routes` — папка с файлами роутера  
-`/controllers` — папка с файлами контроллеров пользователя и карточки   
-`/models` — папка с файлами описания схем пользователя и карточки  
-  
-Остальные директории вспомогательные, создаются при необходимости разработчиком
+### Backend:
 
-## Запуск проекта
+  - сервер на Ubuntu;
+  - Api сервер Node.js c использованием фреймворк express;
+  - база данных на MongoDB;
+  - обновление кода через Git;
+  - процесс-менеджмент PM2;
+  - прокси-сервер на nginx;
 
-`npm run start` — запускает сервер   
-`npm run dev` — запускает сервер с hot-reload
+## Функционал проекта:
+
+- Авторизация и регистрация пользователей;
+- Редактирование аватара и профиля;
+- Добавление фотографии и лайков;
+- Удаление фотографии и лайков;
+- Открытие фотографии в полном размере;
+
+### Инструкция по развертыванию проекта:
+```bash
+# клонирование репозитория
+$ git clone https://github.com/Fomich-Dm/react-mesto-api-full.git
+
+# установка зависимостей
+$ npm install
+
+# запускает сервер
+$ npm run start
+
+# запускает сервер с hot-reload
+$ npm run dev
